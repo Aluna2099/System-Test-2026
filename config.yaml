@@ -1,0 +1,181 @@
+# ============================================================================
+# LIQUID NEURAL SREK TRADING SYSTEM - CONFIGURATION
+# ============================================================================
+# Version: 4.0.0
+# 
+# INSTRUCTIONS:
+# 1. Copy this file to 'config.yaml' (remove .template if present)
+# 2. Fill in your OANDA API credentials
+# 3. Adjust settings as needed
+# 4. NEVER commit this file with real credentials to version control
+# ============================================================================
+
+# ============================================================================
+# OANDA API CONFIGURATION (REQUIRED)
+# ============================================================================
+oanda:
+  # Get these from: https://www.oanda.com/account/tpa/personal_token
+  account_id: ""          # 001-001-13481063-001"
+  api_token: ""           # 81c3f45c12d0e4ee6bed6991df32df3f-3de24be980c0345b61a4b8f7885b1546
+  
+  # Environment: "practice" for paper trading, "live" for real money
+  environment: "practice"
+  
+  # API endpoints (auto-configured based on environment)
+  # practice: api-fxpractice.oanda.com
+  # live: api-fxtrade.oanda.com
+
+# ============================================================================
+# TRADING CONFIGURATION
+# ============================================================================
+trading:
+  # Currency pairs to trade (8 major pairs recommended)
+  pairs:
+    - "EUR_USD"
+    - "GBP_USD"
+    - "USD_JPY"
+    - "AUD_USD"
+    - "USD_CAD"
+    - "NZD_USD"
+    - "EUR_GBP"
+    - "EUR_JPY"
+  
+  # Risk management
+  max_risk_per_trade: 0.02      # 2% of capital per trade
+  max_daily_loss: 0.05          # 5% daily loss limit (stops trading)
+  max_open_positions: 5         # Maximum concurrent positions
+  
+  # Position sizing
+  base_position_units: 1000     # Minimum position size
+  max_position_units: 100000    # Maximum position size
+  
+  # Trading hours (UTC)
+  trading_start_hour: 0         # 00:00 UTC
+  trading_end_hour: 24          # 24:00 UTC (24/7)
+  
+  # Confidence thresholds
+  min_entry_confidence: 0.75    # Minimum confidence to enter trade
+  high_confidence_threshold: 0.90  # High confidence (validated by transformer)
+
+# ============================================================================
+# TRAINING CONFIGURATION
+# ============================================================================
+training:
+  # Historical data settings
+  historical_data_months: 6     # Months of data to fetch for training
+  validation_split: 0.2         # 20% for validation
+  
+  # Training parameters
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 100
+  early_stopping_patience: 10
+  
+  # Checkpointing
+  checkpoint_interval: 1000     # Save every N training steps
+  keep_last_n_checkpoints: 5
+  
+  # Evolution (SREK population)
+  evolution_generations: 210
+  population_size: 400
+  mutation_rate: 0.1
+  crossover_rate: 0.3
+
+# ============================================================================
+# GPU CONFIGURATION
+# ============================================================================
+gpu:
+  # Device settings
+  device: "cuda"                # "cuda" or "cpu"
+  
+  # Memory management (RTX 3060 6GB optimized)
+  target_vram_utilization: 0.80  # 80% VRAM usage
+  safety_buffer_mb: 300          # Reserved for safety
+  
+  # Module VRAM budgets (MB)
+  module_budgets:
+    liquid_neural_ode: 1000
+    meta_srek_population: 1200
+    multi_timescale_networks: 500
+    transformer_validator: 700
+    correlation_gnn: 150
+    attention_memory: 700
+    ensemble_meta_learner: 400
+
+# ============================================================================
+# DATA STORAGE
+# ============================================================================
+storage:
+  # Base directory (relative to installation)
+  data_dir: "data"
+  
+  # Subdirectories (auto-created)
+  historical_data_dir: "data/historical"
+  checkpoints_dir: "data/checkpoints"
+  logs_dir: "data/logs"
+  trades_dir: "data/trades"
+  patterns_dir: "data/patterns"
+  
+  # Database
+  use_duckdb: true
+  db_path: "data/trading_system.duckdb"
+
+# ============================================================================
+# LOGGING CONFIGURATION
+# ============================================================================
+logging:
+  level: "INFO"                 # DEBUG, INFO, WARNING, ERROR
+  
+  # File logging
+  log_to_file: true
+  max_log_size_mb: 100
+  backup_count: 5
+  
+  # Console output
+  log_to_console: true
+  colored_output: true
+
+# ============================================================================
+# USER INTERFACE
+# ============================================================================
+ui:
+  # Update intervals (seconds)
+  status_update_interval: 5
+  metrics_update_interval: 30
+  
+  # Display settings
+  show_trade_notifications: true
+  show_performance_chart: true
+  
+  # Sound alerts (requires system audio)
+  enable_sound_alerts: false
+  alert_on_trade_entry: true
+  alert_on_trade_exit: true
+
+# ============================================================================
+# ADVANCED SETTINGS (MODIFY WITH CAUTION)
+# ============================================================================
+advanced:
+  # Async settings
+  max_concurrent_operations: 10
+  request_timeout_seconds: 30
+  retry_attempts: 3
+  retry_delay_seconds: 5
+  
+  # Feature engineering
+  feature_dimension: 50
+  sequence_length: 64
+  
+  # Model architecture
+  ode_hidden_dim: 384
+  lstm_hidden_dim: 192
+  transformer_d_model: 256
+  gnn_hidden_dim: 128
+  
+  # MAML settings
+  maml_inner_steps: 5
+  maml_inner_lr: 0.01
+  
+  # Memory settings
+  attention_memory_slots: 15000
+  ensemble_members: 400

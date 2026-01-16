@@ -1,0 +1,94 @@
+================================================================================
+         LIQUID NEURAL SREK TRADING SYSTEM - QUICK START GUIDE
+================================================================================
+
+STEP 1: INSTALL
+---------------
+    python install.py
+
+    This will install all dependencies and create the folder structure.
+    Takes about 5-10 minutes depending on your internet speed.
+
+
+STEP 2: GET OANDA API CREDENTIALS
+----------------------------------
+    1. Go to https://www.oanda.com
+    2. Create a FREE demo account (no deposit required)
+    3. Log in and go to: Account → Manage API Access
+    4. Generate a new API token
+    5. Copy your Account ID and API Token
+
+
+STEP 3: CONFIGURE
+-----------------
+    Edit the file: config/config.yaml
+
+    Find these lines and add your credentials:
+    
+        oanda:
+          account_id: "YOUR_ACCOUNT_ID_HERE"
+          api_token: "YOUR_API_TOKEN_HERE"
+          environment: "practice"
+
+    IMPORTANT: Keep environment as "practice" until you're ready for live trading!
+
+
+STEP 4: DOWNLOAD HISTORICAL DATA
+---------------------------------
+    python scripts/fetch_historical_data.py
+
+    This downloads 6 months of forex data for training.
+    Takes about 15-30 minutes.
+
+
+STEP 5: RUN THE SYSTEM
+-----------------------
+    python main.py
+
+    Select mode:
+    [1] Historical Training - Train the AI models (do this first!)
+    [2] Paper Trading - Practice with fake money
+    [3] Live Trading - Real money (only after extensive practice!)
+
+
+STEP 6: MONITOR PERFORMANCE
+----------------------------
+    The system will show real-time statistics:
+    - Win rate
+    - Daily P&L
+    - Active positions
+    - GPU/CPU usage
+
+    Press Ctrl+C to stop gracefully.
+
+
+================================================================================
+                            TROUBLESHOOTING
+================================================================================
+
+ERROR: "CUDA not available"
+    → Install NVIDIA CUDA toolkit from nvidia.com
+    → Or set device: "cpu" in config.yaml (slower)
+
+ERROR: "OANDA API error"  
+    → Check your account_id and api_token in config.yaml
+    → Make sure they are in quotes: "your-token-here"
+
+ERROR: "Module not found"
+    → Run: python install.py
+    → Make sure all module files are in the 'modules' folder
+
+ERROR: "Out of memory"
+    → Close other GPU applications
+    → Reduce batch_size in config.yaml
+
+
+================================================================================
+                              CONTACT & SUPPORT
+================================================================================
+
+For issues, check the logs in: data/logs/
+
+Full documentation: See README.md
+
+================================================================================

@@ -1,0 +1,87 @@
+# ============================================================================
+# LIQUID NEURAL SREK TRADING SYSTEM - DEPENDENCIES
+# ============================================================================
+# Version: 4.0.0
+# Python: 3.10+ required
+#
+# Install with: pip install -r requirements.txt
+# ============================================================================
+
+# ============================================================================
+# CORE DEPENDENCIES
+# ============================================================================
+
+# PyTorch (CUDA 11.8) - Neural networks
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Neural ODE solver
+torchdiffeq>=0.2.3
+
+# Async HTTP client
+aiohttp>=3.9.0
+aiofiles>=23.0.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# Database
+duckdb>=0.9.0
+
+# Configuration
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# ============================================================================
+# UI DEPENDENCIES
+# ============================================================================
+
+# Terminal UI
+rich>=13.0.0
+textual>=0.40.0
+
+# Progress bars
+tqdm>=4.66.0
+
+# ============================================================================
+# VISUALIZATION (Optional)
+# ============================================================================
+
+# Charts and plots
+matplotlib>=3.7.0
+plotly>=5.18.0
+
+# ============================================================================
+# DEVELOPMENT & TESTING
+# ============================================================================
+
+# Type checking
+typing-extensions>=4.8.0
+
+# Logging
+colorlog>=6.7.0
+
+# ============================================================================
+# SYSTEM UTILITIES
+# ============================================================================
+
+# Process management
+psutil>=5.9.0
+
+# File watching
+watchdog>=3.0.0
+
+# Scheduling
+schedule>=1.2.0
+
+# ============================================================================
+# OPTIONAL: DESKTOP APPLICATION
+# ============================================================================
+
+# For desktop launcher (optional)
+# pywin32>=306  # Windows only
+# pyobjc>=10.0  # macOS only
